@@ -48,6 +48,7 @@
 }
 
 .pkmn-card{
+  background-color: white;
   border: 6px solid blue;
   border-radius: 5px;
   padding: 5px;

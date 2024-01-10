@@ -1,3 +1,9 @@
+body {
+  background-image: url('assets/9d677a1268197ba5c95c5ce4141d58c1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
