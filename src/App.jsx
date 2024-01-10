@@ -15,11 +15,9 @@ function toProperCase(string){
 
 function App() {
   const [pkmnArray, setPkmnArray] = useState([])
-  const [gameState, setGameState] = useState(0)
-  
+  const [gameState, setGameState] = useState(0) 
+  const [done, setDone] = useState(false)
 
-  
-  
 
   useEffect(()=>{
     const getNewPkmn = async (amount = 12) => {
@@ -42,6 +40,7 @@ function App() {
         newPkmnArray.push(newPkmn)
       }
       setPkmnArray(newPkmnArray)
+      setDone(true)
     }
     gameState && getNewPkmn()
   },[gameState])
@@ -62,7 +61,7 @@ function App() {
 
   const randomSort = (id) => {
     if(pkmnArray.length > 0){
-      
+    
       let currentOrder = [...pkmnArray]
       let indexToChange = currentOrder.findIndex(pkmn => pkmn.id == id)
       currentOrder[indexToChange]["guessed"] = true
@@ -75,24 +74,41 @@ function App() {
       setPkmnArray(newOrder)
     }
   }
+
+  let totalGuesses = pkmnArray.reduce((totalSelected, pkmn)=>{
+    if(pkmn.guessed){
+      return totalSelected + 1
+    } else{
+      return totalSelected
+    }
+  },0)
+  
   
 
-  if(gameState === 1){
+  if(gameState === 1 && done){
     return (
-      <div id="gameboard">
-        
-        {pkmnArray.map(pkmn=>{
-          return (
-            <div key={pkmn.id} className="pkmn-card" onClick={()=>handleCardSelect(pkmn.id)}>
-              <img src={pkmn.sprite} alt={pkmn.name} />
-              <h2>{toProperCase(pkmn.name)}</h2>
-            </div>
-          )
-        })}
-    </div>
+      <div id="game">
+        <div id="gameboard">
+          
+          {pkmnArray.map(pkmn=>{
+            return (
+              <div key={pkmn.id} className="pkmn-card" onClick={()=>handleCardSelect(pkmn.id)}>
+                <img src={pkmn.sprite} alt={pkmn.name} />
+                <h2>{toProperCase(pkmn.name)}</h2>
+              </div>
+            )
+          })}
+        </div>
+        <div id="stats">Score: {totalGuesses}/{pkmnArray.length}</div>
+      </div>
+      
     )
     
-  } else if(gameState === 0) {
+  }else if(gameState === 1){
+    return (
+      <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    )
+  }else if(gameState === 0) {
     return (
       <button onClick={()=>handleGameState(1)}>Start</button>
     )
