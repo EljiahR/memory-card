@@ -40,3 +40,16 @@
 .read-the-docs {
   color: #888;
 }
+
+#gameboard{
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.pkmn-card{
+  border: 6px solid blue;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
