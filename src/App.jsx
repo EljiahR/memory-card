@@ -55,7 +55,7 @@ function App() {
   },0)
 
   useEffect(()=>{
-    if(totalGuesses === pkmnArray.length){
+    if(totalGuesses === pkmnArray.length && pkmnArray.length !== 0){
       setGameState(2)
     }
   },[totalGuesses, pkmnArray])
