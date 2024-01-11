@@ -71,6 +71,17 @@
   margin: 5px;
 }
 
+#stats{
+  display:grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr;
+}
+
+.pkmn-card{
+  height: 180px;
+  width: 160px;
+}
+
 .lds-spinner {
   color: official;
   display: inline-block;
